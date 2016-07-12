@@ -44,7 +44,6 @@ function checkStash(result, callback) {
     http.get('http://localhost:4567/stashes', (res) => {
         res.setEncoding('utf8');
         res.on('data', (data) => {
-
             data = JSON.parse(data);
             data.forEach((el) => {
                 if (el.path === path) processed = true;
@@ -76,12 +75,15 @@ process.stdin.on('end', () => {
         // do not send new alert if already processed
         if (processed) return;
 
-        var cmd = `echo "${result.check.output}" | mail -s Sensu ${email}`;
+        var cmd = `echo "${result.check.name}: ${result.check.output} on ${result.client.name}" | mail -s Sensu ${email}`;
         exec(cmd, (err, stdout, stderr) => {
-            if (err) return console.error(err);
+            if (err) return console.error(`exec error: ${err}`);
+
+            console.log(`stdout: ${stdout}`);
+            console.error(`stderr: ${stderr}`);
         });
 
-        var msg = JSON.stringify({'text': result.check.output});
+        var msg = JSON.stringify({'text': `${result.check.name}: ${result.check.output} on ${result.client.name}`});
 
         var options = {
             hostname: 'hooks.slack.com',
