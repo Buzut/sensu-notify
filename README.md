@@ -10,7 +10,7 @@ Set the required constants in `notify.js` and place it in the `handlers` directo
 // because the issue isn't resolved, you'd be notified every 30sec…
 const ttl = 7200;
 const email = 'your@email.com';
-const slackPath = '/services/T0G2UEG9Y/B1EASJQKV/mEf55p49tysPddo9UzuJnY3u';
+const slackPath = '/services/xxx/xxx/xxx';
 ```
 
 Don't forget to make it executable by sensu `chmod 744 notify.js && chown sensu:sensu notify.js`
