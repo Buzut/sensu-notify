@@ -31,11 +31,11 @@ Then declare it as a handler in `handlers.json` and make it the default handler 
 }
 ```
 
-Finally, set it as the default handler the checks you need alerting:
+Finally, set it as the default handler for the desired checks:
 ```json
 
 "checks": {
-    "server_metrics": {
+    "reboot": {
         "type": "metric",
         "command": "rebootRequired.sh",
         "interval": 30,
